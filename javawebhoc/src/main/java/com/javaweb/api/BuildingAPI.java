@@ -83,7 +83,7 @@ public class BuildingAPI {
 //            errorResponseDTO.setDetail(details);
 //            return errorResponseDTO;
 //        }
-//        System.out.println(5/0);
+        System.out.println(5/0);
         valiDate(building);
         return null;
     }
