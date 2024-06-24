@@ -1,6 +1,7 @@
 package com.javaweb.api;
 
 import com.javaweb.Beans.ErrorResponseDTO;
+import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import customexception.FieldRequiredException;
 import org.springframework.web.bind.annotation.*;
 
@@ -12,6 +13,7 @@ import java.util.List;
 // Có annotation thì nó mới hiểu là web api không thì chỉ là 1 class bình thường
 @RestController
 public class BuildingAPI {
+
 //    @RequestMapping(value = "/api/building/", method = RequestMethod.GET)
     @GetMapping(value="/api/building/")
     // @Controller thì mới cần có @ResponseBody
@@ -69,7 +71,8 @@ public class BuildingAPI {
 //        return null;
 //    }
     @PostMapping(value="/api/building/")
-    public Object getBuilding(@RequestBody BuildingDTO building) throws FieldRequiredException {
+//    public Object getBuilding(@RequestBody BuildingDTO building) throws FieldRequiredException {
+    public List<BuildingDTO> getBuilding()  {
 //        try {
 //            System.out.println(5/0);
 //            valiDate(building);
@@ -83,8 +86,9 @@ public class BuildingAPI {
 //            errorResponseDTO.setDetail(details);
 //            return errorResponseDTO;
 //        }
-        System.out.println(5/0);
-        valiDate(building);
+//        System.out.println(5/0);
+//        valiDate(building);
+
         return null;
     }
 
