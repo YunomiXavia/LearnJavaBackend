@@ -18,10 +18,6 @@ import java.util.List;
 @RestController
 public class BuildingAPI {
 
-    static final String DB_URL = "jdbc:sqlserver://DESKTOP-TPO0VA4:1433;databaseName=Building";
-    static final String USERNAME = "sa";
-    static final String PASSWORD = "dinhanst2832004";
-
     @Autowired
     private JdbcTemplate jdbcTemplate;
 
