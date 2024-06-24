@@ -3,10 +3,14 @@ package com.javaweb.api;
 import com.javaweb.Beans.ErrorResponseDTO;
 import com.microsoft.sqlserver.jdbc.SQLServerDataSource;
 import customexception.FieldRequiredException;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.jdbc.core.JdbcTemplate;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.jdbc.core.BeanPropertyRowMapper;
 
 import com.javaweb.Beans.BuildingDTO;
 
+import java.sql.*;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -14,9 +18,16 @@ import java.util.List;
 @RestController
 public class BuildingAPI {
 
+    static final String DB_URL = "jdbc:sqlserver://DESKTOP-TPO0VA4:1433;databaseName=Building";
+    static final String USERNAME = "sa";
+    static final String PASSWORD = "dinhanst2832004";
+
+    @Autowired
+    private JdbcTemplate jdbcTemplate;
+
 //    @RequestMapping(value = "/api/building/", method = RequestMethod.GET)
     @GetMapping(value="/api/building/")
-    // @Controller thì mới cần có @ResponseBody
+//    @Controller thì mới cần có @ResponseBody
 //    @ResponseBody
 //     Thường phần tìm kiếm sẽ đẩy lên param
 //     Biến name hứng dữ liệu từ param
@@ -70,6 +81,7 @@ public class BuildingAPI {
 ////        return result;
 //        return null;
 //    }
+
     @PostMapping(value="/api/building/")
 //    public Object getBuilding(@RequestBody BuildingDTO building) throws FieldRequiredException {
     public List<BuildingDTO> getBuilding()  {
@@ -88,8 +100,15 @@ public class BuildingAPI {
 //        }
 //        System.out.println(5/0);
 //        valiDate(building);
-
-        return null;
+        String sql = "SELECT * FROM Building";
+        List<BuildingDTO> buildings = new ArrayList<>();
+        try {
+            buildings = jdbcTemplate.query(sql, new BeanPropertyRowMapper<>(BuildingDTO.class));
+        } catch (Exception e) {
+            e.printStackTrace();
+            System.out.println("Connected database failed...");
+        }
+        return buildings;
     }
 
     // Nếu kế thừa lớp RuntimeException thì không cần throw
